@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สินค้าทั้งหมด — Honey Scent</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-logo">Honey Scent</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">หน้าแรก</a></li>
+          <li><a href="product.html">สินค้าทั้งหมด</a></li>
+          <li><a href="order.html">สั่งซื้อสินค้า</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Product Catalog Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Our Collection</span>
+        <h1 class="section-title">คอลเลกชันน้ำผึ้งแท้</h1>
+        <p class="section-subtitle">
+          เลือกชมน้ำผึ้งทั้ง 10 รายการ แบ่งตามขนาดบรรจุและเอกลักษณ์ของเกสรดอกไม้ทั้ง 4 สไตล์
+        </p>
+      </div>
+
+      <!-- ปุ่มกรองตาม Mood (script.js จะ render ปุ่มทั้งหมดลงในนี้) -->
+      <div id="filter-bar" class="filter-bar"></div>
+
+      <!-- รายการการ์ดสินค้า (script.js จะโหลดจาก products.json มาแสดงผลในนี้) -->
+      <div id="product-list" class="product-grid"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">Honey Scent</div>
+      <p class="section-subtitle">น้ำผึ้งแท้คัดพิเศษจาก 4 แหล่งดอกไม้ธรรมชาติ</p>
+      <p class="footer-copy">&copy; 2026 Honey Scent. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

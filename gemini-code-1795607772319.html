@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Honey Scent — น้ำผึ้งแท้ 4 สไตล์จากธรรมชาติ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-logo">Honey Scent</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">หน้าแรก</a></li>
+          <li><a href="product.html">สินค้าทั้งหมด</a></li>
+          <li><a href="order.html">สั่งซื้อสินค้า</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section (เต็มจอแรก เรียบหรู เน้นตัวอักษร Serif และปุ่มเส้นขอบบาง) -->
+  <section class="hero" style="min-height: calc(100vh - 82px); display: flex; align-items: center;">
+    <div class="container hero-content">
+      <span class="section-eyebrow">Pure Floral Honey Collection</span>
+      <h1 class="hero-title">
+        คัดสรรน้ำผึ้งแท้จาก 4 แหล่งดอกไม้ธรรมชาติ<br>
+        เพื่อรสสัมผัสที่ตอบโจทย์ทุกช่วงเวลาและอารมณ์ของคุณ
+      </h1>
+      <p class="hero-tagline">
+        สัมผัสความแตกต่างของน้ำผึ้งแท้คัดพิเศษ ที่ให้กลิ่นหอมและรสสัมผัสเฉพาะตัวตามสายพันธุ์ดอกไม้<br>
+        ตั้งแต่ความสดชื่นยามเช้า ไปจนถึงความหวานละมุนล้ำลึกในมื้อพิเศษ
+      </p>
+      <a href="product.html" class="btn">ดูสินค้าทั้งหมด</a>
+    </div>
+  </section>
+
+  <!-- 4 Moods Section (การ์ดเรียบหรู เส้นขอบบาง แตะสีจุดเล็กๆ และเส้นใต้หัวข้อ) -->
+  <section class="section section-alt" id="moods">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Four Distinct Characters</span>
+        <h2 class="section-title">เลือกน้ำผึ้งตามอารมณ์และรสสัมผัส</h2>
+        <p class="section-subtitle">
+          คลิกเลือกคาแรกเตอร์ที่ใช่ เพื่อดูรายการน้ำผึ้งที่คัดสรรมาเพื่อช่วงเวลานั้นของคุณโดยเฉพาะ
+        </p>
+      </div>
+
+      <div class="mood-grid">
+        <!-- 1. Fresh -->
+        <a href="product.html?mood=fresh" class="mood-card" data-mood="fresh">
+          <span class="mood-dot"></span>
+          <h3 class="mood-name">
+            สดชื่น
+            <span class="mood-en">Fresh</span>
+          </h3>
+          <div class="mood-divider"></div>
+          <p class="mood-desc">
+            น้ำผึ้งดอกไม้ป่าและดอกส้ม รสเปรี้ยวอมหวานปลายลิ้น โปร่งโล่งชุ่มคอ ช่วยปลุกความสดชื่นให้ร่างกายตื่นตัวในยามเช้า
+          </p>
+        </a>
+
+        <!-- 2. Sweet -->
+        <a href="product.html?mood=sweet" class="mood-card" data-mood="sweet">
+          <span class="mood-dot"></span>
+          <h3 class="mood-name">
+            หวานละมุน
+            <span class="mood-en">Sweet</span>
+          </h3>
+          <div class="mood-divider"></div>
+          <p class="mood-desc">
+            น้ำผึ้งดอกลำไยสีทอง รสหวานนุ่มนวล กลมกล่อมไม่บาดคอ ให้ความรู้สึกอบอุ่นผ่อนคลายเหมือนได้พักผ่อนในวันสบายๆ
+          </p>
+        </a>
+
+        <!-- 3. Confident -->
+        <a href="product.html?mood=confident" class="mood-card" data-mood="confident">
+          <span class="mood-dot"></span>
+          <h3 class="mood-name">
+            มั่นใจ
+            <span class="mood-en">Confident</span>
+          </h3>
+          <div class="mood-divider"></div>
+          <p class="mood-desc">
+            น้ำผึ้งชันโรงและดอกไม้รวม รสเข้มข้นหนักแน่น มีเอกลักษณ์เฉพาะตัวชัดเจน ช่วยเติมพลังงานและปรับสมดุลให้พร้อมลุยงานสำคัญ
+          </p>
+        </a>
+
+        <!-- 4. Romance -->
+        <a href="product.html?mood=romance" class="mood-card" data-mood="romance">
+          <span class="mood-dot"></span>
+          <h3 class="mood-name">
+            โรแมนติก
+            <span class="mood-en">Romance</span>
+          </h3>
+          <div class="mood-divider"></div>
+          <p class="mood-desc">
+            น้ำผึ้งดอกลิ้นจี่และกุหลาบป่า หอมฟุ้งละมุนจมูก หวานล้ำลึกทิ้งท้ายอย่างมีเสน่ห์ เหมาะสำหรับชงดื่มในมื้อพิเศษหรือช่วงเวลายามค่ำคืน
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">Honey Scent</div>
+      <p class="section-subtitle">น้ำผึ้งแท้คัดพิเศษจาก 4 แหล่งดอกไม้ธรรมชาติ</p>
+      <p class="footer-copy">&copy; 2026 Honey Scent. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

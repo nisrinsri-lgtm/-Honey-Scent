@@ -1,0 +1,102 @@
+[
+  {
+    "id": "honey-fresh-30",
+    "name": "น้ำผึ้งสูตร Fresh (30ml)",
+    "mood": "fresh",
+    "type": "jar",
+    "size": "30ml",
+    "price": 89,
+    "image": "images/fresh.jpg",
+    "description": "ขวดจิ๋วสำหรับคนรักความสดชื่น พกไว้บีบผสมน้ำเย็นหรือโซดาดื่มระหว่างวันเพื่อเรียกความกระปรี้กระเปร่า"
+  },
+  {
+    "id": "honey-fresh-100",
+    "name": "น้ำผึ้งสูตร Fresh (100ml)",
+    "mood": "fresh",
+    "type": "jar",
+    "size": "100ml",
+    "price": 199,
+    "image": "images/fresh.jpg",
+    "description": "ขวดใหญ่สุดคุ้มสำหรับชงดื่มทุกเช้า ช่วยให้ชุ่มคอและเติมความสดใสให้เริ่มต้นวันใหม่ได้อย่างเต็มที่"
+  },
+  {
+    "id": "honey-sweet-30",
+    "name": "น้ำผึ้งสูตร Sweet (30ml)",
+    "mood": "sweet",
+    "type": "jar",
+    "size": "30ml",
+    "price": 89,
+    "image": "images/sweet.jpg",
+    "description": "ลิ้มลองความหวานละมุนของน้ำผึ้งแท้ขนาดกะทัดรัด เหมาะสำหรับพกไปทานคู่กับโยเกิร์ตหรือผลไม้ในมื้อว่าง"
+  },
+  {
+    "id": "honey-sweet-100",
+    "name": "น้ำผึ้งสูตร Sweet (100ml)",
+    "mood": "sweet",
+    "type": "jar",
+    "size": "100ml",
+    "price": 199,
+    "image": "images/sweet.jpg",
+    "description": "น้ำผึ้งขวดสามัญประจำบ้าน รสหวานนุ่มทานง่าย เหมาะสำหรับราดแพนเค้กหรือทำเมนูโปรดให้ทุกคนในครอบครัว"
+  },
+  {
+    "id": "honey-confident-30",
+    "name": "น้ำผึ้งสูตร Confident (30ml)",
+    "mood": "confident",
+    "type": "jar",
+    "size": "30ml",
+    "price": 89,
+    "image": "images/confident.jpg",
+    "description": "เติมพลังความเข้มข้นระหว่างวันได้ง่ายๆ เพียงชงผสมกาแฟแก้วโปรดก่อนเข้าประชุมสำคัญ"
+  },
+  {
+    "id": "honey-confident-100",
+    "name": "น้ำผึ้งสูตร Confident (100ml)",
+    "mood": "confident",
+    "type": "jar",
+    "size": "100ml",
+    "price": 199,
+    "image": "images/confident.jpg",
+    "description": "ตอบโจทย์สายสุขภาพและคนวัยทำงานด้วยน้ำผึ้งรสเข้มข้นขวดใหญ่ ที่พร้อมเติมพลังงานให้ร่างกายในทุกวัน"
+  },
+  {
+    "id": "honey-romance-30",
+    "name": "น้ำผึ้งสูตร Romance (30ml)",
+    "mood": "romance",
+    "type": "jar",
+    "size": "30ml",
+    "price": 89,
+    "image": "images/romance.jpg",
+    "description": "ขนาดทดลองที่ให้คุณได้สัมผัสความหอมหวานล้ำลึกของน้ำผึ้งดอกไม้ป่า เพื่อสร้างความประทับใจในมื้อพิเศษ"
+  },
+  {
+    "id": "honey-romance-100",
+    "name": "น้ำผึ้งสูตร Romance (100ml)",
+    "mood": "romance",
+    "type": "jar",
+    "size": "100ml",
+    "price": 199,
+    "image": "images/romance.jpg",
+    "description": "ดื่มด่ำกับกลิ่นหอมอันเป็นเอกลักษณ์ได้อย่างเต็มที่ในขนาด 100ml สำหรับรังสรรค์เครื่องดื่มและเบเกอรี่จานโปรด"
+  },
+  {
+    "id": "honey-tube-fresh",
+    "name": "น้ำผึ้งหลอดบีบพกพา สูตร Fresh",
+    "mood": "fresh",
+    "type": "tube",
+    "size": "หลอดบีบพกพา",
+    "price": 149,
+    "image": "images/fresh.jpg",
+    "description": "บีบง่ายไม่เลอะมือ พกติดกระเป๋าไว้บีบทานเพียวๆ หรือผสมน้ำดื่มได้ทันทีเมื่อต้องการความสดชื่นระหว่างวัน"
+  },
+  {
+    "id": "honey-tube-sweet",
+    "name": "น้ำผึ้งหลอดบีบพกพา สูตร Sweet",
+    "mood": "sweet",
+    "type": "tube",
+    "size": "หลอดบีบพกพา",
+    "price": 149,
+    "image": "images/sweet.jpg",
+    "description": "สะดวกทุกการเดินทางกับน้ำผึ้งรสหวานละมุนแบบหลอดบีบ พร้อมให้คุณเติมความหวานให้มื้ออาหารได้ทุกที่ทุกเวลา"
+  }
+]

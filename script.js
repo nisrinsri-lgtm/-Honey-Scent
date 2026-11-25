@@ -1,160 +1,173 @@
-/* ==========================================================
-   moonnie — script.js (shared by every page)
-   Each init function runs only if its page's elements exist.
-
-   Element ids used:
+/* ==========================================================================
+   head cool — script.js (ใช้ร่วมกันทุกหน้า)
    - product.html : #filter-bar, #product-list
    - order.html   : #orderForm, #customerName, #contact, #items, #total, #note
-   - admin.html   : #ordersTable (its <tbody>)
-   ========================================================== */
+   - admin.html   : #ordersTable tbody
+   แต่ละส่วนจะทำงานเฉพาะเมื่อเจอ element ของหน้านั้นๆ
+   ========================================================================== */
 
 (function () {
   'use strict';
 
-  var ORDER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwYeLS5ZDLIAcYAuY_fLe5t_IMTEkJo1bYSzkz4pcqAKw1sHpf-eaaIolt6t6f8f92J/exec';
-  var ORDERS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSBG80anuHiFOx7IVe4a1yZ4CWWwr6Uv-3yQuH1At4CzkPOigsEVMJbBIwX-TZDdCTymhP24IH_2nOk/pub?gid=0&single=true&output=csv';
+  /* ---------- Config ---------- */
+  var ORDER_ENDPOINT =
+    'https://script.google.com/macros/s/AKfycbzp1W1nsK_ihC8WurchpSGbeZ0CfUdFRTebtdBnE4nGgfRbQOvrTeVBpp2Cc8J_0meV/exec';
+
+  var ORDERS_CSV_URL =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vQppe5C2k_u__-TR_LeX1E20TNga_CwZ1IrQN6U5d-53tY2V85st9B1o9YD3vONkLRrcmJuT7Kab_-Y/pub?gid=0&single=true&output=csv';
 
   var MOODS = [
     { key: 'all', label: 'ทั้งหมด' },
-    { key: 'fresh', label: 'Fresh' },
-    { key: 'sweet', label: 'Sweet' },
-    { key: 'confident', label: 'Confident' },
-    { key: 'romance', label: 'Romance' }
+    { key: 'sport', label: 'SPORT' },
+    { key: 'confident', label: 'CONFIDENT' }
   ];
 
   /* ---------- Helpers ---------- */
-
-  // Create an element safely (text goes in as textContent, never HTML)
-  function el(tag, className, text) {
-    var node = document.createElement(tag);
-    if (className) node.className = className;
-    if (text !== undefined && text !== null) node.textContent = text;
-    return node;
+  function $(selector) {
+    return document.querySelector(selector);
   }
 
-  function formatPrice(price) {
-    return Number(price).toLocaleString('th-TH') + ' บาท';
+  function formatPrice(n) {
+    return Number(n).toLocaleString('th-TH');
   }
 
-  function isValidMood(key) {
-    return MOODS.some(function (m) { return m.key === key; });
+  function getParam(name) {
+    return new URLSearchParams(window.location.search).get(name);
   }
 
-  /* ==========================================================
-     1) product.html — product cards + mood filter
-     ========================================================== */
-
+  /* ==========================================================================
+     1) product.html — โหลดสินค้า + กรองตามสูตร
+     ========================================================================== */
   function initProducts() {
-    var filterBar = document.getElementById('filter-bar');
-    var list = document.getElementById('product-list');
+    var filterBar = $('#filter-bar');
+    var list = $('#product-list');
     if (!filterBar || !list) return;
-
-    list.classList.add('product-grid');
 
     var products = [];
     var currentMood = 'all';
 
-    function buildFilterBar() {
-      filterBar.innerHTML = '';
-      filterBar.classList.add('filter-bar');
+    function isValidMood(m) {
+      return MOODS.some(function (x) { return x.key === m; });
+    }
 
+    function renderFilters() {
+      filterBar.innerHTML = '';
       MOODS.forEach(function (m) {
-        var btn = el('button', 'btn filter-btn', m.label);
+        var btn = document.createElement('button');
         btn.type = 'button';
+        btn.className = 'filter-btn' + (m.key === currentMood ? ' is-active' : '');
         btn.dataset.mood = m.key;
+        btn.textContent = m.label;
+        btn.setAttribute('aria-pressed', m.key === currentMood ? 'true' : 'false');
         btn.addEventListener('click', function () {
-          setMood(m.key, true);
+          setMood(m.key);
         });
         filterBar.appendChild(btn);
       });
     }
 
-    function updateButtons() {
-      filterBar.querySelectorAll('.filter-btn').forEach(function (btn) {
-        var active = btn.dataset.mood === currentMood;
-        btn.classList.toggle('is-active', active);
-        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-      });
+    function buildOrderUrl(p) {
+      var itemName = p.size ? p.name + ' ' + p.size : p.name;
+      return (
+        'order.html?item=' + encodeURIComponent(itemName) +
+        '&price=' + encodeURIComponent(p.price)
+      );
     }
 
-    function buildOrderLink(p) {
-      var params = new URLSearchParams();
-      params.set('item', p.name + ' ' + p.size);
-      params.set('price', p.price);
-      return 'order.html?' + params.toString();
-    }
+    function createCard(p) {
+      var card = document.createElement('article');
+      card.className = 'product-card';
+      card.dataset.mood = p.mood;
 
-    function buildCard(p) {
-      var card = el('article', 'product-card mood mood--' + p.mood);
-
-      var imgWrap = el('div', 'product-card__image');
-      var img = el('img');
+      var media = document.createElement('div');
+      media.className = 'product-card__media';
+      var img = document.createElement('img');
       img.src = p.image;
-      img.alt = p.name;
+      img.alt = p.name + (p.size ? ' ' + p.size : '');
       img.loading = 'lazy';
-      imgWrap.appendChild(img);
+      media.appendChild(img);
 
-      var body = el('div', 'product-card__body');
-      body.appendChild(el('h3', 'product-card__name', p.name));
-      body.appendChild(el('span', 'mood-underline'));
+      var body = document.createElement('div');
+      body.className = 'product-card__body';
 
-      var meta = el('p', 'product-card__meta');
-      meta.appendChild(el('span', 'mood-dot'));
-      meta.appendChild(document.createTextNode(p.size));
+      var moodLabel = document.createElement('span');
+      moodLabel.className = 'mood-label';
+      var dot = document.createElement('span');
+      dot.className = 'mood-dot';
+      moodLabel.appendChild(dot);
+      moodLabel.appendChild(
+        document.createTextNode(p.mood.charAt(0).toUpperCase() + p.mood.slice(1))
+      );
+
+      var title = document.createElement('h3');
+      title.className = 'product-card__title';
+      title.textContent = p.name;
+
+      var meta = document.createElement('p');
+      meta.className = 'product-card__meta';
+      meta.textContent = p.size ? 'แชมพูสำหรับคนรักกีฬา ' + p.size : 'แชมพูสำหรับคนรักกีฬา';
+
+      var desc = document.createElement('p');
+      desc.className = 'product-card__desc';
+      desc.textContent = p.description || '';
+
+      var foot = document.createElement('div');
+      foot.className = 'product-card__foot';
+
+      var price = document.createElement('span');
+      price.className = 'price';
+      price.textContent = formatPrice(p.price);
+      var unit = document.createElement('small');
+      unit.textContent = 'บาท';
+      price.appendChild(unit);
+
+      var buy = document.createElement('a');
+      buy.className = 'btn btn--accent';
+      buy.href = buildOrderUrl(p);
+      buy.textContent = 'สั่งซื้อ';
+
+      foot.appendChild(price);
+      foot.appendChild(buy);
+
+      body.appendChild(moodLabel);
+      body.appendChild(title);
       body.appendChild(meta);
+      body.appendChild(desc);
+      body.appendChild(foot);
 
-      body.appendChild(el('p', 'product-card__price', formatPrice(p.price)));
-
-      var buy = el('a', 'btn btn--gold', 'สั่งซื้อ');
-      buy.href = buildOrderLink(p);
-      body.appendChild(buy);
-
-      card.appendChild(imgWrap);
+      card.appendChild(media);
       card.appendChild(body);
       return card;
     }
 
-    function renderList() {
+    function renderProducts() {
       list.innerHTML = '';
-
       var shown = products.filter(function (p) {
         return currentMood === 'all' || p.mood === currentMood;
       });
 
       if (shown.length === 0) {
-        var empty = el('p', 'text-center', 'เร็วๆ นี้');
-        empty.style.gridColumn = '1 / -1';
+        var empty = document.createElement('p');
+        empty.textContent = 'ไม่พบสินค้าในหมวดนี้';
         list.appendChild(empty);
         return;
       }
 
       shown.forEach(function (p) {
-        list.appendChild(buildCard(p));
+        list.appendChild(createCard(p));
       });
     }
 
-    function setMood(key, updateUrl) {
-      currentMood = isValidMood(key) ? key : 'all';
-      updateButtons();
-      renderList();
-
-      if (updateUrl && window.history && window.history.replaceState) {
-        var url = new URL(window.location.href);
-        if (currentMood === 'all') {
-          url.searchParams.delete('mood');
-        } else {
-          url.searchParams.set('mood', currentMood);
-        }
-        window.history.replaceState(null, '', url);
-      }
+    function setMood(mood) {
+      currentMood = isValidMood(mood) ? mood : 'all';
+      renderFilters();
+      renderProducts();
     }
 
-    buildFilterBar();
-
-    // Read ?mood=xxx before products arrive so the right button is highlighted
-    var urlMood = (new URLSearchParams(window.location.search).get('mood') || '').toLowerCase();
-    currentMood = isValidMood(urlMood) ? urlMood : 'all';
-    updateButtons();
+    // กรองอัตโนมัติจาก ?mood=xxx
+    var paramMood = (getParam('mood') || '').toLowerCase();
+    if (isValidMood(paramMood)) currentMood = paramMood;
+    renderFilters();
 
     fetch('products.json')
       .then(function (res) {
@@ -163,50 +176,49 @@
       })
       .then(function (data) {
         products = data;
-        renderList();
+        renderProducts();
       })
       .catch(function (error) {
         console.error(error);
         list.innerHTML = '';
-        var msg = el('p', 'text-center', 'ไม่สามารถโหลดรายการสินค้าได้ กรุณาลองใหม่อีกครั้ง');
-        msg.style.gridColumn = '1 / -1';
+        var msg = document.createElement('p');
+        msg.textContent = 'โหลดข้อมูลสินค้าไม่สำเร็จ กรุณารีเฟรชหน้านี้อีกครั้ง';
         list.appendChild(msg);
       });
   }
 
-  /* ==========================================================
-     2) order.html — auto-fill form + submit to Apps Script
-     ========================================================== */
-
+  /* ==========================================================================
+     2) order.html — เติมฟอร์มจาก URL + ส่งคำสั่งซื้อ
+     ========================================================================== */
   function initOrder() {
-    var form = document.getElementById('orderForm');
+    var form = $('#orderForm');
     if (!form) return;
 
-    var itemsInput = document.getElementById('items');
-    var totalInput = document.getElementById('total');
+    var itemsEl = $('#items');
+    var totalEl = $('#total');
 
-    // Fill from URL: order.html?item=...&price=...
-    var params = new URLSearchParams(window.location.search);
-    var item = params.get('item');
-    var price = params.get('price');
+    // เติมชื่อสินค้าและราคาจาก URL parameter ทันทีที่โหลดหน้า
+    var item = getParam('item');
+    var price = getParam('price');
+    if (itemsEl && item) itemsEl.value = item;
+    if (totalEl && price) totalEl.value = price;
 
-    if (itemsInput && item) itemsInput.value = item;
-    if (totalInput && price) totalInput.value = price;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    function valueOf(id) {
-      var node = document.getElementById(id);
-      return node ? node.value.trim() : '';
-    }
+      if (typeof form.reportValidity === 'function' && !form.reportValidity()) return;
 
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
+      function val(id) {
+        var el = document.getElementById(id);
+        return el ? el.value.trim() : '';
+      }
 
       var payload = {
-        customerName: valueOf('customerName'),
-        contact: valueOf('contact'),
-        items: valueOf('items'),
-        total: valueOf('total'),
-        note: valueOf('note')
+        customerName: val('customerName'),
+        contact: val('contact'),
+        items: val('items'),
+        total: val('total'),
+        note: val('note')
       };
 
       var submitBtn = form.querySelector('[type="submit"]');
@@ -225,27 +237,30 @@
     });
   }
 
-  /* ==========================================================
-     3) admin.html — orders table from published Google Sheet CSV
-     ========================================================== */
+  /* ==========================================================================
+     3) admin.html — ดึง CSV จาก Google Sheets แสดงเป็นตาราง
+     ========================================================================== */
 
-  // Minimal CSV parser: handles quoted fields, "" escapes,
-  // commas and line breaks inside quotes, CRLF / LF.
+  // parse CSV เอง: รองรับ "..." , "" (escaped quote), ขึ้นบรรทัดใหม่ในช่อง, CRLF
   function parseCSV(text) {
+    if (text.charCodeAt(0) === 0xfeff) text = text.slice(1); // ตัด BOM
+
     var rows = [];
     var row = [];
     var field = '';
     var inQuotes = false;
-
-    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1); // strip BOM
 
     for (var i = 0; i < text.length; i++) {
       var c = text[i];
 
       if (inQuotes) {
         if (c === '"') {
-          if (text[i + 1] === '"') { field += '"'; i++; }
-          else { inQuotes = false; }
+          if (text[i + 1] === '"') {
+            field += '"';
+            i++;
+          } else {
+            inQuotes = false;
+          }
         } else {
           field += c;
         }
@@ -265,6 +280,7 @@
       }
     }
 
+    // แถวสุดท้าย (กรณีไฟล์ไม่ลงท้ายด้วยขึ้นบรรทัดใหม่)
     if (field !== '' || row.length > 0) {
       row.push(field);
       rows.push(row);
@@ -274,66 +290,64 @@
   }
 
   function initAdmin() {
-    var tbody = document.querySelector('#ordersTable tbody');
+    var tbody = $('#ordersTable tbody');
     if (!tbody) return;
 
-    var COLS = 6; // date/time, name, contact, items, total, note
+    var COLS = 6; // วันเวลา, ชื่อลูกค้า, เบอร์โทร/Line, รายการสินค้า, จำนวนเงินรวม, หมายเหตุ
 
     function showMessage(text) {
       tbody.innerHTML = '';
       var tr = document.createElement('tr');
-      var td = el('td', 'text-center', text);
+      var td = document.createElement('td');
       td.colSpan = COLS;
+      td.textContent = text;
       tr.appendChild(td);
       tbody.appendChild(tr);
     }
 
     showMessage('กำลังโหลดข้อมูล...');
 
-    fetch(ORDERS_CSV_URL, { cache: 'no-store' })
+    fetch(ORDERS_CSV_URL)
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.text();
       })
       .then(function (text) {
-        var rows = parseCSV(text)
-          .slice(1) // first row = header
-          .filter(function (r) {
-            return r.some(function (cell) { return cell.trim() !== ''; });
-          })
-          .reverse(); // newest first (sheet rows are appended in time order)
+        var rows = parseCSV(text).filter(function (r) {
+          return r.some(function (cell) { return cell.trim() !== ''; });
+        });
+
+        rows.shift(); // ตัดแถวหัวตาราง
 
         if (rows.length === 0) {
           showMessage('ยังไม่มีรายการสั่งซื้อ');
           return;
         }
 
+        // แถวใหม่ถูกต่อท้ายชีตเสมอ จึงกลับลำดับให้รายการล่าสุดขึ้นก่อน
+        rows.reverse();
+
         tbody.innerHTML = '';
         rows.forEach(function (r) {
           var tr = document.createElement('tr');
           for (var i = 0; i < COLS; i++) {
-            tr.appendChild(el('td', '', (r[i] || '').trim()));
+            var td = document.createElement('td');
+            td.textContent = r[i] !== undefined ? r[i] : '';
+            tr.appendChild(td);
           }
           tbody.appendChild(tr);
         });
       })
       .catch(function (error) {
         console.error(error);
-        showMessage('ไม่สามารถโหลดข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
+        showMessage('โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรชหน้านี้อีกครั้ง');
       });
   }
 
-  /* ---------- Boot ---------- */
-
-  function init() {
+  /* ---------- Init ---------- */
+  document.addEventListener('DOMContentLoaded', function () {
     initProducts();
     initOrder();
     initAdmin();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  });
 })();

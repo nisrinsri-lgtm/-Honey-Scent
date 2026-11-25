@@ -1,74 +1,107 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>สั่งซื้อสินค้า — moonnie</title>
-  <meta name="description" content="กรอกข้อมูลเพื่อสั่งซื้อแชมพู moonnie">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090b0e">
+    <meta name="description" content="แบบฟอร์มสั่งซื้อสินค้า head cool">
+    <title>สั่งซื้อสินค้า — head cool</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="index.html">moonnie</a>
-      <nav class="nav" aria-label="เมนูหลัก">
-        <a href="index.html">หน้าแรก</a>
-        <a href="product.html">สินค้า</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h1>สั่งซื้อสินค้า</h1>
-          <hr class="divider">
-          <p>กรอกข้อมูลของคุณ แล้วเราจะติดต่อกลับเพื่อยืนยันคำสั่งซื้อ</p>
+    <header class="site-header">
+        <div class="container">
+            <a class="logo" href="index.html" aria-label="head cool หน้าแรก">HEAD COOL</a>
+            <nav class="nav" aria-label="เมนูหลัก">
+                <a href="index.html">หน้าแรก</a>
+                <a href="product.html">สินค้าทั้งหมด</a>
+            </nav>
         </div>
+    </header>
 
-        <form id="orderForm" class="order-form">
-          <div class="form-field">
-            <label for="customerName">ชื่อลูกค้า</label>
-            <input type="text" id="customerName" name="customerName" autocomplete="name" required>
-          </div>
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="muted" style="letter-spacing: 0.18em; text-transform: uppercase;">YOUR ORDER</p>
+                    <h1>ยืนยันคำสั่งซื้อ</h1>
+                    <span class="rule" aria-hidden="true"></span>
+                    <p class="lead">กรอกข้อมูลสำหรับติดต่อและตรวจสอบรายละเอียดคำสั่งซื้อของคุณ</p>
+                </div>
 
-          <div class="form-field">
-            <label for="contact">เบอร์โทร / Line</label>
-            <input type="text" id="contact" name="contact" autocomplete="tel" required>
-          </div>
+                <form id="orderForm" style="max-width: 46rem; margin-inline: auto; border: 1px solid var(--line-soft); padding: var(--space-4);">
+                    <div class="field">
+                        <label for="customerName">ชื่อลูกค้า</label>
+                        <input
+                            type="text"
+                            id="customerName"
+                            name="customerName"
+                            autocomplete="name"
+                            placeholder="กรอกชื่อ-นามสกุล"
+                            required
+                        >
+                    </div>
 
-          <div class="form-field">
-            <label for="items">รายการสินค้า</label>
-            <textarea id="items" name="items" rows="2" required></textarea>
-          </div>
+                    <div class="field">
+                        <label for="contact">เบอร์โทร / Line</label>
+                        <input
+                            type="text"
+                            id="contact"
+                            name="contact"
+                            autocomplete="tel"
+                            placeholder="กรอกเบอร์โทรหรือ Line ID"
+                            required
+                        >
+                    </div>
 
-          <div class="form-field">
-            <label for="total">จำนวนเงินรวม (บาท)</label>
-            <input type="text" id="total" name="total" inputmode="decimal" required>
-          </div>
+                    <div class="field">
+                        <label for="items">รายการสินค้า</label>
+                        <textarea
+                            id="items"
+                            name="items"
+                            rows="3"
+                            placeholder="รายการสินค้าที่ต้องการสั่งซื้อ"
+                            required
+                        ></textarea>
+                    </div>
 
-          <div class="form-field">
-            <label for="note">หมายเหตุ</label>
-            <textarea id="note" name="note" rows="3" placeholder="ที่อยู่จัดส่งหรือข้อความเพิ่มเติม (ถ้ามี)"></textarea>
-          </div>
+                    <div class="field">
+                        <label for="total">จำนวนเงินรวม (บาท)</label>
+                        <input
+                            type="number"
+                            id="total"
+                            name="total"
+                            min="0"
+                            step="1"
+                            inputmode="numeric"
+                            placeholder="0"
+                            required
+                        >
+                    </div>
 
-          <div class="form-actions">
-            <button type="submit" class="btn btn--gold">ยืนยันสั่งซื้อ</button>
-          </div>
-        </form>
-      </div>
-    </section>
-  </main>
+                    <div class="field">
+                        <label for="note">หมายเหตุ</label>
+                        <textarea
+                            id="note"
+                            name="note"
+                            rows="3"
+                            placeholder="รายละเอียดเพิ่มเติม (ถ้ามี)"
+                        ></textarea>
+                    </div>
 
-  <footer class="site-footer">
-    <div class="container">
-      <span class="logo">moonnie</span>
-      <p>&copy; 2026 moonnie. สงวนลิขสิทธิ์</p>
-    </div>
-  </footer>
+                    <button class="btn btn--solid" type="submit">ยืนยันสั่งซื้อ</button>
+                </form>
+            </div>
+        </section>
+    </main>
 
-  <script src="script.js"></script>
+    <footer class="site-footer">
+        <div class="container">
+            <a class="logo" href="index.html">HEAD COOL</a>
+            <p class="mb-0">head cool — Sport Shampoo for Every Move</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

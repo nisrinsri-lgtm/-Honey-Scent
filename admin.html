@@ -1,59 +1,87 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>รายการสั่งซื้อ — moonnie</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090b0e">
+    <meta name="description" content="หน้าจัดการรายการสั่งซื้อ head cool">
+    <title>จัดการคำสั่งซื้อ — head cool</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #ordersTable {
+            width: 100%;
+            min-width: 860px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        #ordersTable th,
+        #ordersTable td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--line-soft);
+            vertical-align: top;
+            font-size: var(--fs-sm);
+        }
+
+        #ordersTable thead {
+            background: var(--cream);
+            color: var(--ink);
+        }
+
+        #ordersTable th {
+            font-weight: 500;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
-
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="index.html">moonnie</a>
-      <nav class="nav" aria-label="เมนูหลัก">
-        <a href="index.html">หน้าแรก</a>
-        <a href="product.html">สินค้า</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h1>รายการสั่งซื้อ</h1>
-          <hr class="divider">
-          <p>รายการล่าสุดอยู่ด้านบน</p>
+    <header class="site-header">
+        <div class="container">
+            <a class="logo" href="index.html" aria-label="head cool หน้าแรก">HEAD COOL</a>
+            <nav class="nav" aria-label="เมนูหลัก">
+                <a href="index.html">หน้าแรก</a>
+                <a href="product.html">สินค้าทั้งหมด</a>
+                <a href="admin.html" aria-current="page">จัดการคำสั่งซื้อ</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="table-wrap">
-          <table id="ordersTable" class="data-table">
-            <thead>
-              <tr>
-                <th>วันเวลา</th>
-                <th>ชื่อลูกค้า</th>
-                <th>เบอร์โทร/Line</th>
-                <th>รายการสินค้า</th>
-                <th>จำนวนเงินรวม</th>
-                <th>หมายเหตุ</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="muted" style="letter-spacing: 0.18em; text-transform: uppercase;">ORDER MANAGEMENT</p>
+                    <h1>รายการสั่งซื้อ</h1>
+                    <span class="rule" aria-hidden="true"></span>
+                    <p>รายการคำสั่งซื้อจากลูกค้า</p>
+                </div>
+
+                <div style="overflow-x: auto; border: 1px solid var(--line-soft);">
+                    <table id="ordersTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">วันเวลา</th>
+                                <th scope="col">ชื่อลูกค้า</th>
+                                <th scope="col">เบอร์โทร/Line</th>
+                                <th scope="col">รายการสินค้า</th>
+                                <th scope="col">จำนวนเงินรวม</th>
+                                <th scope="col">หมายเหตุ</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <a class="logo" href="index.html">HEAD COOL</a>
+            <p class="mb-0">head cool — Sport Shampoo for Every Move</p>
         </div>
-      </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer class="site-footer">
-    <div class="container">
-      <span class="logo">moonnie</span>
-      <p>&copy; 2026 moonnie. สงวนลิขสิทธิ์</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

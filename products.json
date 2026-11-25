@@ -1,32 +1,22 @@
 [
   {
-    "id": 1,
-    "name": "แชมพู สดชื่น",
-    "mood": "fresh",
-    "type": "rollon",
-    "size": "30ml",
-    "price": 89,
-    "image": "images/fresh.jpg",
-    "description": "แชมพูกลิ่นสดชื่น ให้ความรู้สึกโปร่งเบา พร้อมเริ่มวันใหม่ ขนาดพกพาง่าย"
+    "id": "sport-shampoo",
+    "name": "SPORT Shampoo",
+    "mood": "sport",
+    "type": "shampoo",
+    "size": "450ml",
+    "price": 259,
+    "image": "images/sport.jpg",
+    "description": "แชมพูสำหรับนักกีฬากลิ่นสปอร์ตสดชื่น ช่วยชำระเหงื่อและความมันหลังซ้อม ให้หนังศีรษะรู้สึกสะอาดพร้อมลุยต่อ"
   },
   {
-    "id": 2,
-    "name": "แชมพู หวานละมุน",
-    "mood": "sweet",
-    "type": "spray",
-    "size": "100ml",
-    "price": 199,
-    "image": "images/fresh.jpg",
-    "description": "แชมพูกลิ่นหวานละมุน อ่อนโยน ให้ความรู้สึกอบอุ่น ขนาดใหญ่ใช้คุ้มยาว"
-  },
-  {
-    "id": 3,
-    "name": "แชมพู มั่นใจ",
+    "id": "confident-shampoo",
+    "name": "CONFIDENT Shampoo",
     "mood": "confident",
-    "type": "rollon",
-    "size": "30ml",
-    "price": 89,
-    "image": "images/sweet.jpg",
-    "description": "แชมพูกลิ่นมั่นใจ ดึงดูดทุกสายตา เหมาะกับทุกโอกาสสำคัญ ขนาดพกพาง่าย"
+    "type": "shampoo",
+    "size": "450ml",
+    "price": 259,
+    "image": "images/confident.jpg",
+    "description": "แชมพูสำหรับนักกีฬาที่ต้องการความมั่นใจ ด้วยกลิ่นหอมสะอาดสุขุม พร้อมดูแลความสะอาดของเส้นผมในทุกวัน"
   }
 ]
